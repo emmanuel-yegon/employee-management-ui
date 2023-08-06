@@ -17,6 +17,7 @@ const AddEmployee = () => {
     if (id) {
       EmployeeService.updateEmployee(id, employee)
         .then((response) => {
+          console.log(employee);
           navigate("/employees");
         })
         .catch((error) => {

@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import EmployeeService from "../services/EmployeeService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ListEmployeeComponent = () => {
   const [employees, setEmployees] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    getAllEmployees();
+  }, []);
+
+  const getAllEmployees = () => {
     EmployeeService.getAllEmployees()
       .then((response) => {
         setEmployees(response.data);
@@ -14,7 +19,17 @@ const ListEmployeeComponent = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  };
+
+  const deleteEmployee = (employeeId) => {
+    EmployeeService.deleteEmployee(employeeId)
+      .then((response) => {
+        getAllEmployees();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="container">
@@ -44,7 +59,13 @@ const ListEmployeeComponent = () => {
                 >
                   Update
                 </Link>
-                <button className="btn btn-danger">Delete</button>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => deleteEmployee(employee.id)}
+                  style={{ marginLeft: "10px" }}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
