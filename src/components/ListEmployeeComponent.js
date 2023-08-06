@@ -28,7 +28,7 @@ const ListEmployeeComponent = () => {
           <th>First Name</th>
           <th>Last Name</th>
           <th>Email ID</th>
-          <th>Contact No</th>
+          <th>Actions</th>
         </thead>
         <tbody>
           {employees.map((employee) => (
@@ -37,7 +37,15 @@ const ListEmployeeComponent = () => {
               <td>{employee.first_name}</td>
               <td>{employee.last_name}</td>
               <td>{employee.email}</td>
-              <td>{employee.contact_number}</td>
+              <td>
+                <Link
+                  className="btn btn-info"
+                  to={`/edit-employee/${employee.id}`}
+                >
+                  Update
+                </Link>
+                <button className="btn btn-danger">Delete</button>
+              </td>
             </tr>
           ))}
         </tbody>
