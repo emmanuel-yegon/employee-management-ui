@@ -117,7 +117,11 @@ const AddEmployee = () => {
                 >
                   Submit
                 </button>
-                <Link to="/employees" className="btn btn-danger">
+                <Link
+                  to="/employees"
+                  className="btn btn-danger"
+                  style={{ marginLeft: "350px" }}
+                >
                   Cancel
                 </Link>
               </form>
